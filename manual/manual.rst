@@ -4,179 +4,399 @@ MapStory Manual
 
 .. contents::
 
+Introduction
+============
+
+MapStory is a collaborative map sharing and publishing platform, with a focus on storytelling. Maps are shown most often with an element of time to aid in the storytelling.
+
+MapStories are also the name for those temporal maps. A MapStory can also include annotations (AND OTHER THINGS).
+
+A StoryLayer is a component of a MapStory that contains geospatial data with a time element. A MapStory can be comprised of one or more StoryLayers.
+
+A StoryTeller is an author of a MapStory. Anyone who __registers__ for an account on MapStory.org can be a StoryTeller.
+
+For more information, please see the MapStory wiki (http://wiki.mapstory.org).
+
+EXPAND THESE DEFINITIONS
+
 
 Getting Started
 ===============
 
+You can interact with existing MapStories and StoryLayers without needing to register. Simply click the **Search MapStory** link and select either **Search MapStories**, **Search StoryLayers**, or **Search StoryTellers**.
+
 Registration
 ------------
 
-Create a MapStory in 5 Minutes
+Before you can create a MapStory, you will need to register for an account. Registration is free and easy.
+
+Navigate to MapStory.org and click on **Register** in the top right of the screen. You will be asked to enter a user name and password (twice for confirmation) and an email address. All fields are required. Note that the user name must consist of only letters, numbers, and underscores. Click **Signup** when finished. A confirmation email will be sent to you which will contain a URL. Navigate to the URL to confirm your registration.
+
+Create a MapStory in 5 minutes
 ------------------------------
 
-Uploading Your StoryLayers
-==========================
-.. _uploads:
+A MapStory consists of one of more StoryLayers. The quickest way to create a MapStory and see its power is to use an existing StoryLayer as source material.
 
-To get started with building your own stories, you must first upload some data,
-referred to as StoryLayers in MapStory. A StoryLayer might stand on it's own
-or be used as part of a MapStory containing multiple StoryLayers.
+* Click the **Search MapStory** link at the top and select **Search StoryLayers**. (You can also type in a keyword in the Quick Search box to find a suitable StoryLayer.)
 
-Before uploading your StoryLayers, please read this section to understand the
-currently supported data formats and tips that will make this process easier.
+* Find a suitable StoryLayer in the list. You can narrow down the search using the category links on the left.
 
-Structuring Your Data To Support Time
+* Click the **Create a Story using this StoryLayer**.
+
+* The next page is the MapStory authoring interface. Here you can add other layers, change the base layer, alter styling, and even edit the features.
+
+* When you're finished, click the **Save Map** button. A dialog box will display where you can enter a Title and Abstract for your new MapStory. When finished, click **Save**.
+
+You've created your first MapStory! The next step is to tell your own story using your own data.
+
+
+
+Preparing your data to become a StoryLayer
+==========================================
+
+To get started with building your own MapStories, the first step is to upload some data, referred to as **StoryLayers** in MapStory. A StoryLayer can be viewed on its own, but most often it is a component of one or more MapStories.
+
+This section will help you understand the currently supported data formats, as well as show tips that will make the upload process easier.
+
+Structuring your data to support time
 -------------------------------------
 
-Specifying the temporal extent of a spatial feature.
+A central aspect of a StoryLayer is that it contains a **time** component, that is, it contains information about the given data over a period of time. To this end, it's important that the data contains date/time in one of its attributes.
 
-* start date
-* optional end date
+When specifying the temporal extent of a spatial feature it should contain the notion of a start date/time as well as optionally an end date/time.
 
-Specifying the nature of the temporal aspect of your data.
+Selecting an attribute
+~~~~~~~~~~~~~~~~~~~~~~
 
-* inteveral data
-* list data
+The attribute that will be selected to offer the time component for the StoryLayer can be in any of the following formats:
+A time attribute can be one of:
 
-.. include:: time.rst
+* A timestamp
+* An integer representing a year
+* A string (text) that can be interpreted as a timestamp
+
+This attribute is selected during the StoryLayer upload process.
+
+Time formats
+~~~~~~~~~~~~
+
+If the attribute in question is a string that can be interpreted as a timestamp, you will need to tell MapStory how the string should be interpreted.. If specifying the time format, you can use the following formatting flags:
+
+* y year
+* M month
+* d day of month
+* H hour of day (0-23)
+* k hour of day (1-24)
+* m minute in hour
+* s second in minute
+
+Notes: 
+* Single quotes represent a literal character not to be interpreted.
+* Repeat a formatting flag to represent the maximum number of digits, such as ``yyyy``
+
+You can also tell MapStory to use its "best guess" algorithm to try to automatically determine the data format. This will work when the date is in one of variants of the ISO 8601 time format. These are any of the following:
+
+* yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+* yyyy-MM-dd'T'HH:mm:sss'Z'
+* yyyy-MM-dd'T'HH:mm:ss'Z'
+* yyyy-MM-dd'T'HH:mm'Z'
+* yyyy-MM-dd'T'HH'Z'
+* yyyy-MM-dd
+* yyyy-MM
+* yyyy
+
+Some common custom examples follow:
+
+Custom Format Examples
+Value  Format
+Jun 2012  MMM-y
+May/15/2012   MMM/d/yyyy
+11/1/2012   M/d/y
+
+Relevant time periods
+~~~~~~~~~~~~~~~~~~~~~
+
+A feature can currently support either one or two time attributes. If a single attribute is used, this is interpreted by MapStory to mean that the feature is considered relevant (and thus displayed displayed) at a single point in time. If two attributes are used, the attributes represent the beginning and ending of the period in which the feature in considered relevant (displayed). The decision on whether to utilize an end date/time is specific to your data and story.
 
 Supported Files
 ---------------
+
 .. _upload-support:
 
-CSV Files
-.........
+MapStory can load the following file types:
+
 .. _upload-csv:
 
-CSV files containing a latitude and longitude column are supported. 
+* CSV (comma-separated value)—These non-spatial files can be loaded when they contain columns with latitude and longitude values.
+* Shapefile—MapStory can read any standard shapefile, including an optional PRJ (projection file).
 
-Zipping Your Data
-.................
+Archive
+~~~~~~~
+
 .. _upload-zip:
 
-To make your data upload faster, consider creating a zip file of your data.
-This can often reduce the size of your upload by 5-10 times. Ensure that the
-zip file does not contain any additional directory structures or uneeded files.
-Only a single StoryLayer may be uploaded at a time using a zip file.
+To reduce the size of the data being uploaded to MapStory and so making the upload faster, consider creating an archive (zip file) of your data. This can increase upload speeds by many times, depending of the type of data being uploaded. If creating an archive, ensure that the archive does not contain any directory structures or extraneous files. 
 
-Due to the nature of a zip file, the upload must complete before feedback can
-be given on the presence of all files, so if unsure, you can drag the files you
-think you might use into the upload form for immediate feedback. When things
-look proper, proceed with the upload using the zip.
+Only a single StoryLayer may be uploaded at a time using an archive. If uploading an archive, note that the name of the resulting StoryLayer will be taken from the file name of the shapefile, not the file name of the archive.
 
 Other Tips
-..........
+~~~~~~~~~~
+
 .. _upload-tips:
 
-* While MapStory supports many projections, to ensure it is recognized, consider
-  using EPSG:4326 or (@todo other terminology - WGS84?). Convert your data
-  before uploading using your favorite tool(link).
-* If your data is on a global level, consider simplifying the geometries to
-  reduce the upload size and make your StoryLayer faster during playback.
-* Know your data - if there are attributes that you don't understand or are a
-  remnant from some processing algorithm, remove them as they take up space and
-  don't contribute to understanding the story.
+here are some other tips that may prove useful when preparing your data for upload
+
+* While MapStory supports many projections, consider using WGS84 (EPSG:4326) to ensure it is recognized.
+
+CAN MAPSTORY NOT REPROJECT?
+
+* If your data is on a global level or is very detailed, consider simplifying the geometries to reduce the upload size and make your StoryLayer faster to display during playback.
+
+* Similar to simplifying the geometries, if there are attributes that aren't necessary to understanding the MapStory, consider removing them to save space and processing time.
+
+* 
+
+Uploading your data
+===================
+
+.. _uploads:
+
+Once your data is prepared, it is ready to be uploaded. From the **Upload StoryLayer** form, you can either drag and drop files, or use the **Browse...** button to select the file or files.
+
+When uploading a shapefile that hasn't been made into an archive, first select the file with the .shp extension. When the file has been selected, the form will expand to include places to select the other files associated with that shapefile, including the .shx, .dbf. and optional .prj files.
+
+Separately to the data, you can also upload an SLD file for use in styling the StoryLayer. This style will automatically be associated with this layer upon a successful upload.
+
+If uploading an archive, be aware that the upload will need to finish before the contents of the archive can be checked for integrity. If you would like immediate feedback on whether the data is in the correct form, you can select the files individually in the form, and then when satisfied, clear the form and upload the archive.
 
 
 Styling Your StoryLayer
 =======================
+
 .. _styling:
 
-When your StoryLayer is uploaded, a style is created for it unless you have
-provided one during upload. A style dictates how a StoryLayer will look when
-it is displayed either in a map or on it's own. A StoryLayer has a default
-style and zero or more optional styles that it can be displayed with. The
-default style is how the StoryLayer will be displayed on the info page and
-will also be the default when added to a MapStory. When in a MapStory, a
-StoryLayer may appear multiple times with different styles applied.
+When your StoryLayer is uploaded, a default style will be created for it unless a style file was provided during the upload, in which case that style will be associated with the layer. A style dictates how a StoryLayer will look when it is displayed. A StoryLayer has a default style and zero or more optional styles that can be displayed in addition. The default style is how the StoryLayer will be displayed on the **Info tab** and will also be the default when added to a MapStory. When contained in a MapStory, a StoryLayer may appear multiple times with different styles applied.
 
-One can manage the default style, upload additional styles, or download styles 
-for a StoryLayer on the info page under the `Style` tab. If the StoryLayer has
-optional styles, they can be previewed here, too.
+One can manage the default style, upload additional styles, or download styles for a StoryLayer on the **Info tab** under the Style tab. If the StoryLayer has optional styles, they can be previewed here, too.
 
-To update an existing style, ensure this option is selected and the name matches
-and existing style.
+To update an existing style, ensure that the **Update existing style** option is selected and that the name matches an existing style.
 
-If a name is not provided, an attempt will be made to extract a name from the
-SLD using the first `Name` underneath a `NamedLayer`. If this cannot be found,
-a name must be provided explicitly.
+If a name is not provided, an attempt will be made to extract a name from the SLD. If a proper name cannot be found, a name must be provided explicitly.
 
 You must be the owner of a StoryLayer for all style functionality to be available.
 
-
-Editing Styles
+Editing styles
 --------------
 
-At the moment, MapStory provides some support for editing styles when a 
-StoryLayer is part of a MapStory. Styles in MapStory are stored in an open text
-format known as
-`SLD <http://docs.geoserver.org/stable/en/user/styling/sld-introduction.html>`_ .
-This means they can be edited by hand or in other tools, such as
-`QGIS <http://qgis.org/>`_ .
-
-.. tip::
-   :class: alert alert-info
-
-   For adventurous users, editing the SLD by hand may be desirable. To get a
-   template, (or just to see if you're adventurous enough), download an existing
-   SLD and take a look at it.
+At the moment, MapStory provides some limited support for editing styles when a StoryLayer is part of a MapStory. Styles are stored in an open text format known as SLD (Styled Layer Descriptor) LINK . An SLD can be edited in a simple text editor or in any program that supports editing of SLD files, such as __QGIS__.
 
 
-Publishing Your Work
-====================
+Publishing your content
+=======================
 
-When first created, a StoryLayer or MapStory is considered `Private`. This
-means that only you can search for or view it. When you are ready, ensure that
-you choose the appropriate publishing status. This can be done on the info page
-at the bottom of the `Info` tab.
+When first created, a StoryLayer or MapStory is set to be Private. This means that only you can search for or view it. When you are ready, ensure that you choose the appropriate publishing status. This can be done on the info page at the bottom of the **Info tab**.
 
-.. tip::
-   :class: alert alert-info
-   
-   If you are changing the status of a MapStory, any StoryLayers it uses that
-   you own will also be changed.
+The available options are: **Only visible to me** (default), **Anyone with the link can view**, and **Anyone can search for and view**.
 
-The available options:
+If you are changing the status of a MapStory, any StoryLayers that comprise that MapStory will also have their status changed.
 
-.. list-table:: Publishing Status Options
-   :header-rows: 1
-   
-   * - Value
-     - Meaning
-   * - Private (Only visible to me)
-     - Only you can search for and view this.
-   * - Linkable (Anyone with a link can view)
-     - Will be hidden from search but others can view via the link.
-   * - Public (Anyone can search for and view)
-     - As implied.
+StoryLayer page
+===============
+
+The StoryLayer page contains a map window where the StoryLayer can be viewed, as well as information about the StoryLayer.
+
+When viewing a StoryLayer, there are a number of tabs that correspond to various functionality associate with that layer. The tabs available are **Info**, **Style**, **Share**, **Flag**, **Add**, and **Download**.
+
+In addition to the tabs, there is a StoryLayer rating option. Click on the stars to rate the layer between one and five stars.
+
+At the very bottom of the page is a place where you can add comments to the page. Simply type in some text in the comment field and click **Submit** to make your voice heard.
+
+
+Map window
+----------
+
+The Map window is the centerpiece of the StoryLayer page. The map window contains a view of the data, with an optional base layer. This map window can be zoomed and panned as desired, but by default it will zoom to the maximum extent of the layer across the entire time frame.
+
+The map window contains a few controls at the bottom. The controls are, from left to right:
+
+* Play/Pause—Controls the starting and stopping of the map animation
+* Timeline—Displays and controls the current map time instance
+* Loop—When enabled, the animation will continue from the beginning after it has completed
+* 2x Playback—When enabled, will double the speed of the playback
+* Reverse one frame—Will skip backward to the previous time instance
+* Advance one frame—Will skip forward to the next time instance
+* Show map legend—Will toggle the map legend, where the base map can also be toggled
+* Data and time options—Allows you to specify start and end date/time range, and animation options
+* Full screen—Will toggle viewing the map over the entire screen area
+
+Info tab
+--------
+
+The Info tab, which is the default tab when viewing a StoryLayer, contains fields for metadata. From this tab, you can enter a proper layer Title (distinct from the internal layer name as saved by MapStory), Keywords, an Abstract (description), the Purpose of this StoryLayer, the intended Language, any Supplemental Information about the Layer, and a Data Quality Statement. This information will be available to anyone who views this StoryLayer.
+
+In addition to the metadata, you can also associate this StoryLayer with a range of preexisting topics, from Culture & Ideas to GeoPolitics.
+
+You can set a thumbnail for this layer by adjusting the map window to a desired location and then by clicking the **Set thumbnail** button.
+
+You change the visibility of the layer by clicking the **Change Status** button. There are three options: **Only visible to me** (default), **Anyone with the link can view**, and **Anyone can search for and view**.
+
+Style tab
+---------
+
+The Style tab allows you to select from existing styles associated with the StoryLayer, or upload a new one. Styles can't be directly edited on this tab; to edit a style, you must create a MapStory and load this StoryLayer. (LINK TO SOME DOC?)
+
+Share tab
+---------
+
+The Share tab has buttons to allow this StoryLayer to be shared on popular social networking sites.
+
+Flag tab
+--------
+
+The Flag tab has not been implemented yet.
+
+Add tab
+-------
+
+The Add tab allows you to add the StoryLayer to your list of Favorites, as well as to associate this StoryLayer with a MapStory that is in progress.
+
+WHAT DOES IN PROGRESS MEAN? NO OPTIONS WHEN I CLICKED.
+
+Download tab
+------------
+
+The download tab allows you to download the data that comprises the StoryLayer, as well as any associated styles. The formats available for download are:
+
+* Zipped shapefile
+* GML (2.0, 3.1.1)
+* CSV
+* Excel
+* GeoJSON
+* JPEG
+* PDF
+* PNG
+* KML (full download or for live viewing in Google Earth)
+
 
 Using media in annotations
 ==========================
 
-The following types of media can be embedded in an annotation popup in the description field:
+NEED MORE DETAIL HERE
 
-* YouTube
-* Flickr
-* An arbitrary hyperlink
+The following types of media can be embedded in an annotation pop-up in the description field:
+
+* A URL
+* YouTube video
+* Flickr photo
 
 To embed a YouTube video, use the following syntax:
 
     [youtube=http://www.youtube.com/watch?v=O_s3EryiL7M]
 
-If you want to influence the width and or height of the video iframe, add a w and/or h url parameter, e.g.:
+If you want to influence the width and or height of the video, add a w and/or h URL parameter:
 
-    [youtube=http://www.youtube.com/watch?v=O_s3EryiL7M&w=350] 
+    [youtube=http://www.youtube.com/watch?v=O_s3EryiL7M&w=350]
 
-but in keep in mind that the popups have a maximum width of 500 pixels.
+Pop-ups have a maximum width of 500 pixels. WHAT HAPPENS IF LARGER?
 
 You can combine the YouTube video with any HTML in front or after the YouTube declaration.
 
-For Flickr use the Share button in the Flickr interface and then press the Grab HTML/BBCode hyperlink.
-Copy/paste the HTML, but make sure to change the target to _blank on the anchor:
+For Flickr use the Share button in the Flickr interface and then press the Grab HTML/BBCode hyperlink. Copy/paste the HTML, but make sure to change the target to _blank on the anchor:
 
     <a target="_blank" href="http://www.flickr.com/photos/jetbluestone/8128332626/" title="48.. by jetbluestone, on Flickr"><img src="http://farm9.staticflickr.com/8472/8128332626_b231b833db.jpg" width="371" height="500" alt="48.."></a>
 
-To embed any arbitrary hyperlink in the annotation popup, just use plain old HTML, for example:
+To embed any arbitrary URL in the annotation pop-up, just enter it as-is:
 
     <a target="_blank" href="http://myurl" title="myhyperlink">click here to go to my url</a>
+
+
+
+Tutorial 
+========
+
+This example will create a MapStory based on a single uploaded StoryLayer. The StoryLayer will then be annotated 
+AND MORE THINGS
+
+Step 0: Acquire data
+--------------------
+
+UNSURE ABOUT VOICE (WE HAVE, YOU HAVE)
+
+This example will use a single layer prepared for upload, consisting of the locations of Hurricane Sandy (LINK) over the course of its lifespan. It is in shapefile format, and it was taken from the NOAA as part of their freely available GIS data (LINK). To make it simpler to upload, the component files have been compressed into an archive (ZIP file).
+
+http://www.nhc.noaa.gov/gis/  (specifically WHERE?)
+
+Separately, we have an SLD (style) file that has been prepared using a third-party utility. This will be uploaded along with the data.
+
+The time attribute to use is called "DTG", and the string is of the form "yyyyMMddHH".
+
+Step 1: Upload data
+-------------------
+
+* Log in to your MapStory account and then return to the main MapStory page.
+
+* Click **Upload StoryLayers**.
+
+* Since the data is already zipped, it is easiest to drag and drop the file onto the box titled **Drag and Drop Files Here**. Alternately, click the **Browse...** button next to the Data field, and select the file for upload.
+
+* Since we have an SLD already created and ready to be associated with this layer, we can also drag and drop the file in the same way. Alternately, click the **Browse...** button next to the SLD field, and select the file for upload.
+
+* When finished, click **Upload**.
+
+Step 2: Specify coordinate reference system
+-------------------------------------------
+
+In most cases, MapStory will be able to determine the intended coordinate reference system to be used in your data. In this case, the PRJ file which includes the CRS definition was included, but MapStory was unable to parse it. In such a case, MapStory will ask you to input the intended CRS.
+
+In this case, the data is in standard WGS84 geographic coordinates, so when it asks for the EPSG code, enter EPSG:4326. Then click **Submit**.
+
+Step 3: Associate time attribute
+--------------------------------
+
+Once the upload has successfully completed, the next page will allow you to associate a particular attribute with the time aspect of the StoryLayer.
+
+* When asked "Does this data have date/time attributes?", click the **Yes** box.
+
+* The data was taken at varying intervals, so when asked "Was the data collected at regular intervals?", click the No box. 
+
+* Next, set the Start Date/Time. There are two supported Types, Text, or Year Number. When selecting Text, you will have the opportunity to interpret the text field of a particular attribute as a date/time field. When selecting Year Number, the integer in the attribute will be interpreted literally. In this case, select **Text** in the field for **Type**. In the **Attribute** field, select **DTG**. In the **Date Format** field, select **Custom** and then enter the following string in the **Custom Format** field: **yyyyMMddHH**
+
+THIS DOESN'T WORK.
+
+* When asked "Does this data have an end date/time attribute?", click the **No** box.
+
+* Click **Next** to continue.
+
+Step 4: Preview StoryLayer
+--------------------------
+
+* At this point, the StoryLayer will finish being configured. The next page will show the StoryLayer, and allow you to see the animation of the data over time. In the map display, click the **Play** button to see the map in motion.
+
+Step 5: Add layer info
+----------------------
+
+Data without description doesn't make for a compelling MapStory, so the next step is to add metadata to the StoryLayer. Add the following on the Info tab:
+
+* Title—Hurricane Sandy storm track
+* Keywords—hurricane, storm, weather
+* Abstract—This data set is a subjectively-smoothed representation of Hurricane Sandy's location and intensity at regular intervals over its lifetime. 
+* Purpose—The best track is a living database which servers as the official U.S. National Weather Service historical record of the tropical cyclone.
+* Supplemental Information—Originally sourced from the National Weather Service's National Hurricane Center GIS Archive at http://www.nhc.noaa.gov/gis/ .
+* Data Quality Statement—This data is taken from a reliable source and is believed to be reasonably accurate.
+
+Then click **Update information**.
+
+Step 6: Create MapStory
+-----------------------
+
+Now that the StoryLayer has been tested, it is time to include it in a MapStory. To do this click **Create MapStory**
+
+NEED MORE DETAILS HERE
+
+Step 7: Publish MapStory
+------------------------
+
+NEED MORE DETAILS HERE
+
+ANY MORE STEPS?
 
