@@ -310,19 +310,17 @@ To embed any arbitrary URL in the annotation pop-up, just enter it as-is:
     <a target="_blank" href="http://myurl" title="myhyperlink">click here to go to my url</a>
 
 
-
 Tutorial 
 ========
 
-This example will create a MapStory based on a single uploaded StoryLayer. The StoryLayer will then be annotated 
-AND MORE THINGS
+This example will create a MapStory based on a single uploaded StoryLayer. The StoryLayer will then be annotated...
+
+WHAT ELSE TO DO HERE?
 
 Step 0: Acquire data
 --------------------
 
-UNSURE ABOUT VOICE (WE HAVE, YOU HAVE)
-
-This example will use a single layer prepared for upload, consisting of the locations of Hurricane Sandy (LINK) over the course of its lifespan. It is in shapefile format, and it was taken from the NOAA as part of their freely available GIS data (LINK). To make it simpler to upload, the component files have been compressed into an archive (ZIP file).
+This example will use a single layer prepared for upload, consisting of the locations of Hurricane Sandy (LINK) over the course of its lifespan. It is in shapefile format, and it was taken from NOAA as part of their freely available GIS data (LINK). To make it simpler to upload, the component files have been compressed into an archive (ZIP file).
 
 http://www.nhc.noaa.gov/gis/  (specifically WHERE?)
 
@@ -330,27 +328,54 @@ Separately, we have an SLD (style) file that has been prepared using a third-par
 
 The time attribute to use is called "DTG", and the string is of the form "yyyyMMddHH".
 
-Step 1: Upload data
+Step 1: Prepare data
+--------------------
+
+The shapefile attribute that contains the date and time is called "DTG", and its values are of the form "yyyyMMddHH".
+
+Investigating the data shows that it has a type of Integer. In order to be able to manually map this custom date string to a standard date/time format, the attribute needs to be of type String (text).
+
+This data preparation can be done via third-party utilities such as QGIS (LINK) or ogr2ogr (LINK). The instructions below will create a copy of the contents of the DTG attribute in a new attribute called DTGSTRING, which will be of type String.
+
+In QGIS:
+
+* Open the file **Add Vector Layer...**.
+
+* Right-click on the layer in the **Layers** list and select **Open attribute table**.
+
+* Click the **Toggle Editing Mode** button.
+
+* Click the **Field Calculator** button.
+
+* Fill out the form. Check the **Create new field** box, enter an **Output field name** of DTGSTRING, and select **Output field type** as **Text (String)**. In the **Expression** field, enter **tostring(DTG)**, and click **OK**.
+
+* Click the **Save Edits** button.
+
+WHAT ABOUT OGR2OGR?
+
+* After the edits are made, create an archive of the edited files.
+
+Step 2: Upload data
 -------------------
 
 * Log in to your MapStory account and then return to the main MapStory page.
 
 * Click **Upload StoryLayers**.
 
-* Since the data is already zipped, it is easiest to drag and drop the file onto the box titled **Drag and Drop Files Here**. Alternately, click the **Browse...** button next to the Data field, and select the file for upload.
+* Drag and drop the archive onto the box titled **Drag and Drop Files Here**. Alternately, click the **Browse...** button next to the Data field, and select the file for upload.
 
 * Since we have an SLD already created and ready to be associated with this layer, we can also drag and drop the file in the same way. Alternately, click the **Browse...** button next to the SLD field, and select the file for upload.
 
 * When finished, click **Upload**.
 
-Step 2: Specify coordinate reference system
+Step 3: Specify coordinate reference system
 -------------------------------------------
 
 In most cases, MapStory will be able to determine the intended coordinate reference system to be used in your data. In this case, the PRJ file which includes the CRS definition was included, but MapStory was unable to parse it. In such a case, MapStory will ask you to input the intended CRS.
 
 In this case, the data is in standard WGS84 geographic coordinates, so when it asks for the EPSG code, enter EPSG:4326. Then click **Submit**.
 
-Step 3: Associate time attribute
+Step 4: Associate time attribute
 --------------------------------
 
 Once the upload has successfully completed, the next page will allow you to associate a particular attribute with the time aspect of the StoryLayer.
@@ -359,41 +384,39 @@ Once the upload has successfully completed, the next page will allow you to asso
 
 * The data was taken at varying intervals, so when asked "Was the data collected at regular intervals?", click the No box. 
 
-* Next, set the Start Date/Time. There are two supported Types, Text, or Year Number. When selecting Text, you will have the opportunity to interpret the text field of a particular attribute as a date/time field. When selecting Year Number, the integer in the attribute will be interpreted literally. In this case, select **Text** in the field for **Type**. In the **Attribute** field, select **DTG**. In the **Date Format** field, select **Custom** and then enter the following string in the **Custom Format** field: **yyyyMMddHH**
-
-THIS DOESN'T WORK.
+* Next, set the Start Date/Time. There are two supported Types, Text, or Year Number. When selecting Text, you will have the opportunity to interpret the text field of a particular attribute as a date/time field. When selecting Year Number, the integer in the attribute will be interpreted literally. In this case, select **Text** in the field for **Type**. In the **Attribute** field, select **DTGSTRING**. In the **Date Format** field, select **Custom** and then enter the following string in the **Custom Format** field: **yyyyMMddHH**
 
 * When asked "Does this data have an end date/time attribute?", click the **No** box.
 
 * Click **Next** to continue.
 
-Step 4: Preview StoryLayer
+Step 5: Preview StoryLayer
 --------------------------
 
 * At this point, the StoryLayer will finish being configured. The next page will show the StoryLayer, and allow you to see the animation of the data over time. In the map display, click the **Play** button to see the map in motion.
 
-Step 5: Add layer info
+Step 6: Add layer info
 ----------------------
 
 Data without description doesn't make for a compelling MapStory, so the next step is to add metadata to the StoryLayer. Add the following on the Info tab:
 
 * Title—Hurricane Sandy storm track
 * Keywords—hurricane, storm, weather
-* Abstract—This data set is a subjectively-smoothed representation of Hurricane Sandy's location and intensity at regular intervals over its lifetime. 
+* Abstract—This data set is a subjectively-smoothed representation of Hurricane Sandy's location and intensity at regular intervals over its lifetime.
 * Purpose—The best track is a living database which servers as the official U.S. National Weather Service historical record of the tropical cyclone.
 * Supplemental Information—Originally sourced from the National Weather Service's National Hurricane Center GIS Archive at http://www.nhc.noaa.gov/gis/ .
 * Data Quality Statement—This data is taken from a reliable source and is believed to be reasonably accurate.
 
 Then click **Update information**.
 
-Step 6: Create MapStory
+Step 7: Create MapStory
 -----------------------
 
 Now that the StoryLayer has been tested, it is time to include it in a MapStory. To do this click **Create MapStory**
 
 NEED MORE DETAILS HERE
 
-Step 7: Publish MapStory
+Step 8: Publish MapStory
 ------------------------
 
 NEED MORE DETAILS HERE
