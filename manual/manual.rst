@@ -278,6 +278,69 @@ The download tab allows you to download the data that comprises the StoryLayer, 
 * KML (full download or for live viewing in Google Earth)
 
 
+MapStory fullscreen viewer
+==========================
+
+WHAT IS THIS PAGE CALLED?
+
+There are two ways to view a MapStory:
+
+* Through the standard viewing page, much like the StoryLayer page
+* In a full screen viewer
+
+You can get to the MapStory fullscreen viewer in multiple ways:
+
+* Searching for a given MapStory and selecting it
+* Clicking the **View this StoryLayer in fullscreen** on a StoryLayer page
+* Clicking **Create New MapStory** from the homepage
+
+This section will describe the MapStory fullscreen viewer interface
+
+Header
+------
+
+The header of the page shows the title of the MapStory. There is also a **View info** link that will take you back to the standard mapStory viewer page. Clicking the **Maps** link wil take you to the **Search MapStories** page, and clicking the MapStory logo will, as everywhere else, return you to MapStory.org.
+
+Toolbar
+-------
+
+The toolbar runs across the top of the screen, just below the header, and contains a few different actions relevant to manipulation of the MapStory.
+
+* **Map Properties**—Displays a dialog with three additional options: **Number of zoom levels**, **Wrap dateline (Yes/No)**, and **Background color**.
+* **Save Map**—Saves changes made to the map. If the map is new, a new map will be created and given a unique numerical identifier on the page, accessible by the following URL: http://mapstory.org/maps/####/view, where #### is the numerical identifier of the MapStory.
+* **Publish Map**—Displays a pop-up window containing HTML code for embedding the map in a webpage.
+* **Zoom in**—Increases the current zoom level by one
+* **Zoom in/out**—Decreases the current zoom level by one
+* **Zoom to previous extent**—Returns to the previous map extent
+* **Zoom to next extent**—Returns to the next map extent (activated only after using Zoom to previous extent)
+* **Zoom to max extent**—Zooms to the maximum extent of all layers
+* **Get Feature Info**When activated, displays a pop-up containing attribute information for all the features on a given clicked point on the map
+* **Notes**—A menu containing three options:
+
+  * **Show notes**—Toggles whether existing notes are displayed
+  * **Add note**—Creates a new note (annotation) on the map. A note consists of a title, description, and start/end times, as well as a geometry (point/line/polygon) showing the area of interest.
+  * **Edit note**—Edits an existing note.
+
+* **Create a new feature**—Creates a new feature in the selected layer. New feature must be drawn in, and attribute values populated manually.
+* **Edit existing feature**—Edits an existing feature in the selected layer. Either the geometry or attribute values can be edited.
+
+Layers panel
+------------
+
+The layers panel contains information related to the layers associated with the MapStory. This can include StoryLayers as well as base layers, such as OpenStreetMap.
+
+The Layers panel has its own toolbar:
+
+* **Add layers**—Displays the Available Layers panel for adding new layers to the MapStory
+* **Remove layer**—Removes the currently selected layer from the list
+* **Layer Properties**—Displays the Layer Properties panel for viewing and editing the properties of the selected layer (layer name and description, display settings, and layer styles). For attribute information, use the **Get Feature Info** tool in the main toolbar.
+* **Layer Styles**—Displays the Layer Styles panel for editing layer styling rules
+
+Below the Layers toolbar is the layers list. The layers list consists of two sections: **Overlays** and **Base Maps**. Overlays can be Storylayers or any layer from a remote Web Map Server. **Base Maps** consist of hosted web service layers such as OpenStreetMap and Blue Marble.
+
+
+
+
 Using media in annotations
 ==========================
 
