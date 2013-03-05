@@ -274,7 +274,7 @@ The Share tab has buttons to allow this StoryLayer to be shared on popular socia
 Flag tab
 --------
 
-The Flag tab has not been implemented yet.
+The Flag tab allows you to insert a comment stating whether a given StoryLayer appears to be inappropriate, broken, or otherwise problematic.
 
 .. _storylayer.addtab:
 
@@ -319,10 +319,10 @@ You can get to the MapStory fullscreen viewer in multiple ways:
 
 This section will describe the MapStory fullscreen viewer interface.
 
-.. _mapstoryviewer.header:
+.. _mapstoryviewer.top:
 
-Header
-------
+Top of viewer
+-------------
 
 The header of the page shows the title of the MapStory. There is also a **View info** link that will take you back to the standard MapStory viewer page. Clicking the **Maps** link will take you to the **Search MapStories** page.
 
